@@ -1,0 +1,10 @@
+<launch>
+  <node pkg="rosbag" type="play" name="rosbag" args="-s 1050 -u 100 /home/venu/catkin_ws/src/lane_detector/George1.bag" output="screen" />
+  <node name="republish" pkg="image_transport" type="republish" respawn="false" output="screen" args=" compressed in:=/RawStereoToRos/left/image_raw raw out:=camera/image_raw">    
+  </node>
+  
+  <node name="project3dtouv" pkg="pcl_projection" type="project3dtouv" respawn="false" output="screen"> 
+    <remap from="/camera/camera_info" to ="/RawStereoToRos/left/camera_info"/> 
+  </node>
+
+</launch>

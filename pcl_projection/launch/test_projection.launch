@@ -1,0 +1,18 @@
+<launch>
+  <node pkg="rosbag" type="play" name="rosbag" args="/home/venu/zeus_ws/src/pcl_projection/test1.bag" output="screen" />
+
+  <node name="republish" pkg="image_transport" type="republish" respawn="false" output="screen" args=" compressed in:=/ProcessedStereoToRos/left/image_rect raw out:=camera/image_raw">    
+  </node>  
+
+ <!-- start nodelet manager and driver nodelets -->
+  <include file="$(find velodyne_driver)/launch/nodelet_manager.launch" />
+
+  <!-- start cloud nodelet -->
+  <include file="$(find velodyne_pointcloud)/launch/cloud_nodelet.launch">
+  <arg name="calibration"
+         value="$(find velodyne_pointcloud)/params/64e_utexas.yaml"/>   
+  </include>
+
+  <node name="image_view" pkg="image_view" type="image_view" respawn="false" args="image:=camera/image_raw"/>   
+
+</launch>

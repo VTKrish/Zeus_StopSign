@@ -1,0 +1,21 @@
+<launch>
+  <node pkg="rosbag" type="play" name="rosbag" args="-s 560 -u 100 /home/venu/catkin_ws/src/lane_detector/George1.bag" output="screen" />
+  <node name="republish" pkg="image_transport" type="republish" respawn="false" output="screen" args=" compressed in:=/RawStereoToRos/left/image_raw raw out:=camera/image_raw">    
+  </node>
+  
+  <node name="project3dtouv" pkg="pcl_projection" type="project3dtouv" respawn="false" output="screen" launch-prefix="xterm -e"> 
+    <remap from="/camera/camera_info" to ="/RawStereoToRos/left/camera_info"/> 
+  </node>
+
+ <!-- start nodelet manager and driver nodelets -->
+  <include file="$(find velodyne_driver)/launch/nodelet_manager.launch" />
+
+  <!-- start cloud nodelet -->
+  <include file="$(find velodyne_pointcloud)/launch/cloud_nodelet.launch">
+  <arg name="calibration"
+         value="$(find velodyne_pointcloud)/params/64e_utexas.yaml"/>   
+  </include>
+
+  <node name="image_view" pkg="image_view" type="image_view" respawn="false" args="image:=camera/image_raw"/>   
+
+</launch>
