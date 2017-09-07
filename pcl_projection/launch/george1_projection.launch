@@ -1,5 +1,5 @@
 <launch>
-  <node pkg="rosbag" type="play" name="rosbag" args="-s 560 -u 100 /home/venu/catkin_ws/src/lane_detector/George1.bag" output="screen" />
+  <node pkg="rosbag" type="play" name="rosbag" args="-s 560 -u 100 /home/venu/zeus_ws/src/George1.bag" output="screen" />
 
   <node name="republish" pkg="image_transport" type="republish" respawn="false" output="screen" args=" compressed in:=/RawStereoToRos/left/image_raw raw out:=camera/image_raw">    
   </node>
