@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+
+<!-- Run using: `roslaunch buick_tf.launch` and display in RVIZ -->
+
+<launch>
+    <node type="static_transform_publisher" pkg="tf" name="broadcaster_applanix" args="0 0 0.1236 0 3.14159 0 sensor_base applanix_base 100" />
+    <node type="static_transform_publisher" pkg="tf" name="broadcaster_bumblebee" args="0.50787 0 0.07567 0 0 0 sensor_base bumblebee_base 100" />
+    <node type="static_transform_publisher" pkg="tf" name="broadcaster_bumblebee_optical" args="0 0.12 0 -1.5708 0 -1.5708 bumblebee_base bumblebee_optical 100" />
+    <node type="static_transform_publisher" pkg="tf" name="broadcaster_sick_left" args="-0.46954 0.62411 -0.02734 1.5708 0 1.5708 sensor_base sick_lidar_left 100" />
+    <node type="static_transform_publisher" pkg="tf" name="broadcaster_sick_right" args="-0.46954 -0.62411 -0.02734 -1.5708 0 -1.5708 sensor_base sick_lidar_right 100" />
+    <node type="static_transform_publisher" pkg="tf" name="broadcaster_velodyne" args="0 0 0.2032 0 0 0 sensor_base velodyne 100" />
+</launch>

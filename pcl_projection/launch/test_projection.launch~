@@ -1,11 +1,8 @@
 <launch>
   <node pkg="rosbag" type="play" name="rosbag" args="/home/venu/zeus_ws/src/pcl_projection/test1.bag" output="screen" />
+
   <node name="republish" pkg="image_transport" type="republish" respawn="false" output="screen" args=" compressed in:=/ProcessedStereoToRos/left/image_rect raw out:=camera/image_raw">    
-  </node>
-  
-  <node name="project3dtouv" pkg="pcl_projection" type="project3dtouv" respawn="false" output="screen" launch-prefix="xterm -e"> 
-    <remap from="/camera/camera_info" to ="/RawStereoToRos/left/camera_info"/> 
-  </node>
+  </node>  
 
  <!-- start nodelet manager and driver nodelets -->
   <include file="$(find velodyne_driver)/launch/nodelet_manager.launch" />
