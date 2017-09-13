@@ -1,5 +1,8 @@
 <launch>
-  <node pkg="rosbag" type="play" name="rosbag" args="-s 370 -u 50 /home/venu/zeus_ws/src/car_test2.bag" output="screen" />
+
+  <include file="$(find pcl_projection)/launch/buick_tf.launch"/>
+
+  <node pkg="rosbag" type="play" name="rosbag" args="-s 369 -u 0.5 /home/venu/zeus_ws/src/car_test2.bag" output="screen" />
 
   <node name="republish" pkg="image_transport" type="republish" respawn="false" output="screen" args=" compressed in:=/ProcessedStereoToRos/left/image_rect raw out:=camera/image_raw">    
   </node>
